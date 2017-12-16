@@ -1,0 +1,22 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "centos:latest",
+      "commit": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/{{user `playbook`}}.yml"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "{{user `playbook`}}",
+      "tag": "{{user `build`}}"
+    }
+  ]
+}

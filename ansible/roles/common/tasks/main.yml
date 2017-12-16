@@ -1,0 +1,13 @@
+- name: Install EPEL repo.
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: Install EPEL repo GPG key
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+  notify: update packages

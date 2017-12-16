@@ -1,0 +1,8 @@
+---
+- name: Configure Nginx
+  copy:
+    src: "{{item}}"
+    dest: "/etc/nginx/{{item}}"
+  with_items:
+    - nginx.conf
+    - servers/

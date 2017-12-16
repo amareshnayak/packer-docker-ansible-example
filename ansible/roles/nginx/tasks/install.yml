@@ -1,0 +1,15 @@
+- name: Add Nginx repo
+  yum_repository:
+    name: nginx
+    description: nginx repo
+    baseurl: http://nginx.org/packages/centos/7/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: Install nginx repo GPG key
+  rpm_key:
+    state: present
+    key: https://nginx.ru/keys/nginx_signing.key
+
+- name: Install nginx
+  yum: name=nginx state=present

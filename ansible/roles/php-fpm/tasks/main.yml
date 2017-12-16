@@ -1,0 +1,28 @@
+- name: Install Remi base repo.
+  yum_repository:
+    name: remi
+    description: Remi YUM repo
+    baseurl: http://rpms.famillecollet.com/enterprise/$releasever/remi/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: Install Remi php repo.
+  yum_repository:
+    name: remi-php72
+    description: Remi YUM repo
+    baseurl: http://rpms.famillecollet.com/enterprise/$releasever/php72/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: Install REMI repo GPG key
+  rpm_key:
+    state: present
+    key: http://rpms.remirepo.net/RPM-GPG-KEY-remi
+  notify: update packages
+
+- name: Install php
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - php-fpm
